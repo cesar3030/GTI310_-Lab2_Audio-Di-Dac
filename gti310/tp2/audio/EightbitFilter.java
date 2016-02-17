@@ -1,31 +1,43 @@
 package gti310.tp2.audio;
 
+import gti310.tp2.io.FileSink;
+import gti310.tp2.io.FileSource;
+import gti310.tp2.model.WaveFile;
+
 import java.io.File;
+import java.io.FileNotFoundException;
 
 /**
  * Created by Iron_Cesar on 16-02-04.
  */
-public class EightbitFilter implements AudioFilter{
+public class EightBitFilter implements AudioFilter{
 
+    private FileSource fileSource = null;
+    private FileSink fileSink = null;
+    private WaveFile waveFile = null;
 
+    public EightBitFilter(String pathWaveFile, String pathNewFile) {
 
-    public EightbitFilter(File wavefile,String pathNewFile) {
+        try {
 
-        //TODO: Initialiser FileSource avec the given file
+            this.fileSource = new FileSource(pathWaveFile);
+            this.fileSink = new FileSink(pathNewFile);
 
-        //TODO: Initialiser le FileSink avec le PathNewFile
-
-
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void process() {
         //TODO: implement process
 
-        //On lit le fichier avec File Source
-
+        //We retrieve header informations
+        byte[] tmp = fileSource.pop(44);
         //Créer une instance de WaveFile et lire l'entete du fichier pour setter les attibuts
-
+        this.waveFile = new WaveFile(tmp);
+        this.waveFile.readHeader();
+        System.out.println(waveFile.toString());
         //Convert in 8bits
 
         //send the data to the fileSink instance
