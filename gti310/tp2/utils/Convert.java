@@ -6,19 +6,17 @@ import java.nio.ByteBuffer;
 import static com.google.common.primitives.UnsignedBytes.toInt;
 /**
  * Class that provides methods to convert data
+ *
+ * intToBytes method find on stackOverFlow: http://stackoverflow.com/questions/1936857/convert-integer-into-byte-array-java
  */
 public class Convert {
 
+
     /**
-     * Method that convert a signed int into an unsigned int
-     * @param num the signed number
+     * Method that convert a byte array into an int
+     * @param in the byte array
      * @return the unsigned value of num
      */
-    public static int toUnsignedInt(Byte num){
-        //return ((num & 0xFF) <<  0);
-            return toInt(num); //16 195 240 355 2
-    }
-
     public static int readInt(byte[] in){
 
         int value = 0;
@@ -30,15 +28,41 @@ public class Convert {
         else if(in.length == 4){
             value = bb.getInt();
         }
-
         return value;
     }
 
-    public static short readShort(byte in){
-        return (short)(in | (in << 8));
+    /**
+     * Method that convert an int to a byte Array
+     * @param i the int
+     * @return The byte array corresponding to the given int
+     */
+    public static byte toByte(int i) {
+        return (byte) i;
     }
 
-    public static byte toByte(int value){
-        return new Byte("1"); //TODO
+
+
+
+    /**
+     * Method that convert an int to a byte Array
+     * @param i the int
+     * @return The byte array corresponding to the given int
+     */
+    public static byte[] intToByte(int i) {
+        ByteBuffer bb = ByteBuffer.allocate(4);
+        bb.putInt(i);
+        return bb.array();
     }
+
+    /**
+     * Method that convert an short to a byte Array
+     * @param i the int
+     * @return The byte array corresponding to the given int
+     */
+    public static byte[] shortToByte(short i) {
+        ByteBuffer bb = ByteBuffer.allocate(2);
+        bb.putShort(i);
+        return bb.array();
+    }
+
 }

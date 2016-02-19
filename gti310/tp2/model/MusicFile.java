@@ -16,6 +16,7 @@ public abstract class MusicFile {
     protected int sampleRate;
     protected int subChunk2Size;
     protected int numChannels;
+    protected int chunkSize;
 
     /**
      * Constructor
@@ -23,8 +24,6 @@ public abstract class MusicFile {
      */
     public MusicFile(byte[] header){
         this.header = header;
-        System.out.println("header = " + header.length);
-        //readHeader();
     }
 
     /**
@@ -33,29 +32,34 @@ public abstract class MusicFile {
     public abstract void readHeader();
 
     /**
+     * Method that extract the ChunkSize value form the header
+     */
+    public abstract int readChunkSize();
+
+    /**
      * Method that extract the BitPerSample value form the header
      */
-    public abstract int readBitPerSample();
+    protected abstract int readBitPerSample();
 
     /**
      * Method that extract the ByteRate value from the header
      */
-    public abstract int readByteRate();
+    protected abstract int readByteRate();
 
     /**
      * Method that extract the SampleRate value from the header
      */
-    public abstract int readSampleRate();
+    protected abstract int readSampleRate();
 
     /**
      * Method that extract the SubChunk2Size value from the header
      */
-    public abstract int readSubChunk2Size();
+    protected abstract int readSubChunk2Size();
 
     /**
      * Method that extract the NumChannels value from the header
      */
-    public abstract int readNumChannels();
+    protected abstract int readNumChannels();
 
     /**
      * Method that update header information for the given bitPerSample
@@ -63,34 +67,7 @@ public abstract class MusicFile {
      */
     public abstract byte[] updateHeader(int bitPerSample);
 
-    /**
-     * Method that calculate the ByteRate value for the given bitPerSample
-     * @param bitPerSample
-     * @return the ByteRate
-     */
-    protected abstract int calculateByteRate(int bitPerSample);
 
-    /**
-     * Method that calculate the BlockAlign value for the given bitPerSample
-     * @param bitPerSample
-     * @return the BlockAlign
-     */
-    protected abstract int calculateBlockAlign(int bitPerSample);
-
-    /**
-     * Method that calculate the SubChunk2Size value for the given bitPerSample
-     * @param bitPerSample
-     * @return the SubChunk2Size
-     */
-    protected abstract int calculateSubChunk2Size(int bitPerSample);
-
-    /**
-     * Method that calculate the SubChunk1Size value for the given bitPerSample
-     * @param bitPerSample
-     * @return the SubChunk1Size
-
-    protected abstract int calculateSubChunk1Size(int bitPerSample);
-     */
 
 
     /**
@@ -130,5 +107,61 @@ public abstract class MusicFile {
                 ", subChunk2Size=" + subChunk2Size +
                 ", numChannels=" + numChannels +
                 '}';
+    }
+
+    public int getNumChannels() {
+        return numChannels;
+    }
+
+    public void setNumChannels(int numChannels) {
+        this.numChannels = numChannels;
+    }
+
+    public int getSubChunk2Size() {
+        return subChunk2Size;
+    }
+
+    public void setSubChunk2Size(int subChunk2Size) {
+        this.subChunk2Size = subChunk2Size;
+    }
+
+    public int getSampleRate() {
+        return sampleRate;
+    }
+
+    public void setSampleRate(int sampleRate) {
+        this.sampleRate = sampleRate;
+    }
+
+    public int getByteRate() {
+        return byteRate;
+    }
+
+    public void setByteRate(int byteRate) {
+        this.byteRate = byteRate;
+    }
+
+    public int getBitPerSample() {
+        return bitPerSample;
+    }
+
+    public void setBitPerSample(int bitPerSample) {
+        this.bitPerSample = bitPerSample;
+    }
+
+    public byte[] getHeader() {
+        return header;
+    }
+
+    public void setHeader(byte[] header) {
+        this.header = header;
+    }
+
+    public int getChunkSize() {
+        return chunkSize;
+    }
+
+    public void setChunkSize(int chunkSize) {
+        this.chunkSize = chunkSize;
     }
 }
