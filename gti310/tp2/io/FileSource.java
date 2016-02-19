@@ -11,7 +11,7 @@ import java.io.IOException;
  * sequential order to a caller. When the data reaches the end-of-file marker,
  * it will return nothing.
  * 
- * @author François Caron <francois.caron.7@ens.etsmtl.ca>
+ * @author Franï¿½ois Caron <francois.caron.7@ens.etsmtl.ca>
  */
 public class FileSource {
 	
@@ -64,13 +64,17 @@ public class FileSource {
 			
 			/* read the number of bytes asked for, or the amount left in the
 			 * file */
-			_reader.read(buffer);
-			
+			int left =_reader.read(buffer);
 			/* return what was read */
-			return buffer;
+            if (left!=-1)
+                return buffer;
+
+            return null;
 		} catch (IOException e) {
 			/* something went wrong, or EOF reached */
 			return null;
 		}
 	}
+
+
 }
