@@ -1,6 +1,7 @@
 package gti310.tp2;
 
 import gti310.tp2.audio.EightBitFilter;
+import gti310.tp2.audio.SNRFilter;
 
 public class Application {
 
@@ -14,7 +15,7 @@ public class Application {
             new EightBitFilter(args[1],args[2]).process();
         }
         else if(args[0].equals("programme2")){
-
+            new SNRFilter(args).process();
         }
         else{
             System.out.println("You need to give a first parameter !");

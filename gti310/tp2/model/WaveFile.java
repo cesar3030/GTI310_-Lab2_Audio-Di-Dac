@@ -12,6 +12,9 @@ public class WaveFile extends MusicFile{
         super(header);
     }
 
+    public WaveFile(String filePath){ super(filePath);}
+
+
     @Override
     public void readHeader() {
         super.bitPerSample = readBitPerSample();
