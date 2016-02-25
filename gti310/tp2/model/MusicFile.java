@@ -17,13 +17,25 @@ public abstract class MusicFile {
     protected int subChunk2Size;
     protected int numChannels;
     protected int chunkSize;
+    //Signal to noise ration
+    protected double snr;
+    //The path to access to the file
+    protected String filePath;
 
     /**
-     * Constructor
+     * Constructor with file header
      * @param header
      */
     public MusicFile(byte[] header){
         this.header = header;
+    }
+
+    /**
+     * Constructor with file path
+     * @param filePath the path to the music file
+     */
+    public MusicFile(String filePath){
+        this.filePath = filePath;
     }
 
     /**
@@ -163,5 +175,21 @@ public abstract class MusicFile {
 
     public void setChunkSize(int chunkSize) {
         this.chunkSize = chunkSize;
+    }
+
+    public double getSnr() {
+        return snr;
+    }
+
+    public void setSnr(double snr) {
+        this.snr = snr;
+    }
+
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
     }
 }

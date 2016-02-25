@@ -76,5 +76,19 @@ public class FileSource {
 		}
 	}
 
+    /**
+     * Skip bytes
+     * @param nbBytes number of bytes to skip
+     */
+    public void skip(int nbBytes){
+        try {
+            _reader.skipBytes(nbBytes);
+        } catch (IOException e) {
+            System.out.println("An error occurred while we tried to skip bytes");
+            e.printStackTrace();
+        }
+    }
+
+
 
 }
