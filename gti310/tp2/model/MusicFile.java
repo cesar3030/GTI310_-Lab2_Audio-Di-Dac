@@ -194,10 +194,12 @@ public abstract class MusicFile implements Comparable{
         this.filePath = filePath;
     }
 
-    public int compareTo(MusicFile o){
-        if(this.snr > o.getSnr())
+    public int compareTo(Object o){
+        MusicFile m = (MusicFile)o;
+
+        if(this.snr > m.getSnr())
             return 1;
-        else if(this.snr < o.getSnr())
+        else if(this.snr < m.getSnr())
             return -1;
         else
             return 0;

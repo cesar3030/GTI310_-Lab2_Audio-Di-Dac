@@ -4,6 +4,7 @@ import gti310.tp2.io.FileSource;
 import gti310.tp2.model.MusicFile;
 import gti310.tp2.model.WaveFile;
 import gti310.tp2.utils.Convert;
+import gti310.tp2.utils.InsertionSort;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -64,6 +65,9 @@ public class SNRFilter implements AudioFilter {
 
             originalFile.close();
             comparedFile.close();
+
+            //We sort the files
+            InsertionSort.sort(files);
 
             System.out.println("-------- RESULT --------");
             for (int i = 1; i < files.size(); i++) {
