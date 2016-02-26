@@ -4,11 +4,12 @@ import gti310.tp2.utils.Convert;
 
 import java.io.File;
 import java.util.Arrays;
+import java.util.Comparator;
 
 /**
  * Created by Iron_Cesar on 16-02-04.
  */
-public abstract class MusicFile {
+public abstract class MusicFile implements Comparable{
 
     protected byte[] header;
     protected int bitPerSample;
@@ -191,5 +192,16 @@ public abstract class MusicFile {
 
     public void setFilePath(String filePath) {
         this.filePath = filePath;
+    }
+
+    public int compareTo(Object o){
+        MusicFile m = (MusicFile)o;
+
+        if(this.snr > m.getSnr())
+            return 1;
+        else if(this.snr < m.getSnr())
+            return -1;
+        else
+            return 0;
     }
 }
