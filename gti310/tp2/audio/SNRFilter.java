@@ -41,6 +41,9 @@ public class SNRFilter implements AudioFilter {
         }
     }
 
+    /**
+     * O(N^3)
+     */
     @Override
     public void process() {
 
@@ -59,7 +62,7 @@ public class SNRFilter implements AudioFilter {
                     e.printStackTrace();
                 }
                 //we calculate the SNR and set it to the current file being investigate
-                double snr = calculateSNR(comparedFile);
+                double snr = calculateSNR(comparedFile); //O(N^2) * N
                 fileInvestigate.setSnr(snr);
             }
 
@@ -87,6 +90,7 @@ public class SNRFilter implements AudioFilter {
      * Method that compare the given file to the original file and return the SNR
      * @param fileToCompare The file we will compare
      * @return the SNR
+     * O(N^2)
      */
     public double calculateSNR(FileSource fileToCompare){
 
