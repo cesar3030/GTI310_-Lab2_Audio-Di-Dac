@@ -35,6 +35,7 @@ public class Convert {
      * Method that convert an int to a byte Array
      * @param i the int
      * @return The byte array corresponding to the given int
+     * O(1)
      */
     public static byte toByte(int i) {
         return (byte) i;
@@ -47,6 +48,7 @@ public class Convert {
      * Method that convert an int to a byte Array
      * @param i the int
      * @return The byte array corresponding to the given int
+     * O(1)
      */
     public static byte[] intToByte(int i) {
         ByteBuffer bb = ByteBuffer.allocate(4);
@@ -58,6 +60,7 @@ public class Convert {
      * Method that convert an short to a byte Array
      * @param i the int
      * @return The byte array corresponding to the given int
+     * O(1)
      */
     public static byte[] shortToByte(short i) {
         ByteBuffer bb = ByteBuffer.allocate(2);

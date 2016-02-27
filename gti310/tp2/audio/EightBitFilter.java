@@ -30,6 +30,9 @@ public class EightBitFilter implements AudioFilter{
         this.pathNewFile = pathNewFile;
     }
 
+    /**
+     * O(N^2)
+     */
     @Override
     public void process() {
 
@@ -56,17 +59,17 @@ public class EightBitFilter implements AudioFilter{
 
                 System.out.println(waveFile.toString());
                 //We update the header value and push it in the new file
-                byte[] newHeader = this.waveFile.updateHeader(8);
+                byte[] newHeader = this.waveFile.updateHeader(8);                   //O(1)
 
                 WaveFile test= new WaveFile(newHeader);
-                test.readHeader();
+                test.readHeader();                                                  //O(N)
                 System.out.println(test.toString());
 
                 fileSink.push(newHeader);
                 fileSource.close();
 
                 //We convert data in 8bits and push it into the new file
-                this.convertData();
+                this.convertData();                                                 //O(N^2)
 
                 fileSink.close();
                 System.out.println("Conversion from 16 Bits to 8 Bits Done");
@@ -85,6 +88,7 @@ public class EightBitFilter implements AudioFilter{
 
     /**
      * Method that read the original file 16bits data, convert them into a 8bits and push the new values into the new file
+     * O(N^2)
      */
     private void convertData(){
 
@@ -106,9 +110,9 @@ public class EightBitFilter implements AudioFilter{
         byte[] data16Bits = fileSource.pop(this.nb16BitsSampleRead);
 
 
-        while (data16Bits != null){
+        while (data16Bits != null){                     //O(N)
 
-            for(int i=0;i<data16Bits.length;i=i+2){
+            for(int i=0;i<data16Bits.length;i=i+2){     //O(N) * N
                 tmp[0]=data16Bits[i];
                 tmp[1]=data16Bits[i+1];
                 data8Bits[index] = to8bits(tmp);
@@ -127,6 +131,7 @@ public class EightBitFilter implements AudioFilter{
      * Method that convert a 16 bits value stored in 2 bytes in a 8 bits stored in a single byte
      * @param data Array of two bytes
      * @return the 8 bits value
+     * O(1)
      */
     private byte to8bits(byte[] data){
         byte[] tmp = new byte[2];

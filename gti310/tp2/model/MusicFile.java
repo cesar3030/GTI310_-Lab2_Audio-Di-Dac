@@ -88,6 +88,7 @@ public abstract class MusicFile implements Comparable{
      * @param offset  Where the reading starts
      * @param size    The number of bytes needed to be read
      * @return the unsigned int value
+     * O(N)
      */
     public int readBytes(int offset, int size){
 

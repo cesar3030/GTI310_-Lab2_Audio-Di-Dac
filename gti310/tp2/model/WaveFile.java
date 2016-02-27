@@ -14,7 +14,9 @@ public class WaveFile extends MusicFile{
 
     public WaveFile(String filePath){ super(filePath);}
 
-
+    /**
+     * O(N)
+     */
     @Override
     public void readHeader() {
         super.bitPerSample = readBitPerSample();
@@ -55,6 +57,12 @@ public class WaveFile extends MusicFile{
         return readBytes(22,2);
     }
 
+    /**
+     *
+     * @param bitPerSample The bit per sample that we want the header to convert in
+     * @return
+     * O(1)
+     */
     @Override
     public byte[] updateHeader(int bitPerSample) {
        updateBitPerSample(bitPerSample);
@@ -68,6 +76,7 @@ public class WaveFile extends MusicFile{
 
     /**
      * Method that update the value of the field ChunkSize in the wave original header
+     * O(1)
      */
     private void updateChunkSize() {
         int newByteRate = calculateChunkSize();
@@ -81,6 +90,7 @@ public class WaveFile extends MusicFile{
     /**
      * Method that calculate the ChunkSize field value
      * @return ChunkSize
+     * O(1)
      */
     private int calculateChunkSize() {
         return 36+super.subChunk2Size;
@@ -90,6 +100,7 @@ public class WaveFile extends MusicFile{
     /**
      * Method that update the value of the field bitPerSample in the wave original header
      * @param bitPerSample
+     * O(1)
      */
     private void updateByteRate(int bitPerSample){
         int newByteRate = calculateByteRate(bitPerSample);
@@ -103,6 +114,7 @@ public class WaveFile extends MusicFile{
     /**
      * Method that update the value of the field BlockAlign in the wave original header
      * @param bitPerSample
+     * O(1)
      */
     private void updateBlockAlign(int bitPerSample){
         short newBlockAlign = (short) calculateBlockAlign(bitPerSample);
@@ -114,6 +126,7 @@ public class WaveFile extends MusicFile{
     /**
      * Method that update the value of the field SubChunk2Size in the wave original header
      * @param bitPerSample
+     * O(1)
      */
     public void updateSubChunk2Size(int bitPerSample){
         int newSubChunk2Size = calculateSubChunk2Size(bitPerSample);
@@ -124,6 +137,11 @@ public class WaveFile extends MusicFile{
         super.header[43]=tmp[0];
     }
 
+    /**
+     * Method that update the value of the field BitPerSample in the wave original header
+     * @param bitPerSample
+     * O(1)
+     */
     private void updateBitPerSample(int bitPerSample) {
         byte[] tmp = Convert.shortToByte((short)bitPerSample);
         super.header[34]=tmp[1];
@@ -135,6 +153,7 @@ public class WaveFile extends MusicFile{
      * Method that calculate the ByteRate value for the given bitPerSample
      * @param bitPerSample
      * @return the ByteRate
+     * O(1)
      */
     public int calculateByteRate(int bitPerSample) {
         return sampleRate * numChannels * (bitPerSample/8);
@@ -145,6 +164,7 @@ public class WaveFile extends MusicFile{
      * Method that calculate the BlockAlign value for the given bitPerSample
      * @param bitPerSample
      * @return the BlockAlign
+     * O(1)
      */
     public int calculateBlockAlign(int bitPerSample) {
         return numChannels * (bitPerSample/8);
@@ -154,6 +174,7 @@ public class WaveFile extends MusicFile{
      * Method that calculate the SubChunk2Size value for the given bitPerSample
      * @param bitPerSample
      * @return the SubChunk2Size
+     * O(1)
      */
     public int calculateSubChunk2Size(int bitPerSample) {
         int numSample = subChunk2Size / (numChannels * (super.bitPerSample /8));
